@@ -1,42 +1,50 @@
 console.log('App.js is Running');
 
-let app = {
+const app = {
     title: 'The Awesome Indecision App',
-    subTitle: 'What a wonderful App'
+    subTitle: 'What a wonderful App',
+    options: ['Item One', 'Item Two']
 };
 
 // JSX - JavaScript XML
-let template = (
+const template = (
     <div>
         <h1>{app.title}</h1>
-        <p>{app.subTitle}</p>
+        {app.subTitle && <p>{app.subTitle}</p>}
+        <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
         <ol>
             <li>Item One</li>
             <li>Item Two</li>
             <li>Item Three</li>
-        </ol>
+        </ol>  
     </div>
 );
 
-let appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 // Create Template JSX Expression
 // Render instead of Template
-let user = {
-    name: 'Jon',
+const user = {
+    name: 'Jon Maldia',
     age: 42,
     location: 'NYC'
 };
 
-let templateTwo = (
-    <div>
-        <h1>{user.name.toUpperCase() + '!'}</h1>
-        <p>Age: {user.age}</p>
-        <p>Location: {user.location}</p>
-    </div>
-);
+function getLocation(location) {
+    if (location) { 
+        return <p>Location: {location}</p>; 
+    }
+}
 
-let appRootTwo = document.getElementById('app-two');
+const templateTwo = (
+    <div>
+        <h1>{user.name ? user.name.toUpperCase() + '!' : 'Anonymous'}</h1>
+        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+        {getLocation(user.location)}
+    </div>
+); 
+
+const appRootTwo = document.getElementById('app-two');
 
 ReactDOM.render(template, appRoot);
 ReactDOM.render(templateTwo, appRootTwo);
