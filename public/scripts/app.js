@@ -1,36 +1,80 @@
 'use strict';
 
-// arguments object - no longer bound
-// when access it, it doesn't work
+console.log('App.js is Running');
 
-var add = function add(a, b) {
-    console.log(arguments); // prints out all the arguments
-    return a + b;
+var app = {
+    title: 'The Awesome Indecision App',
+    subTitle: 'What a wonderful App',
+    options: ['Item One', 'Item Two']
 };
 
-console.log(add(1, 2, 3)); // is accessible to function
+// JSX - JavaScript XML
+var template = React.createElement(
+    'div',
+    null,
+    React.createElement(
+        'h1',
+        null,
+        app.title
+    ),
+    app.subTitle && React.createElement(
+        'p',
+        null,
+        app.subTitle
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.options.length > 0 ? 'Here are your options' : 'No options'
+    ),
+    React.createElement(
+        'ol',
+        null,
+        React.createElement(
+            'li',
+            null,
+            'Item One'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item Two'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item Three'
+        )
+    )
+);
 
-var addArrow = function addArrow(a, b) {
-    // console.log(arguments); // will error
-    return a + b;
-};
+var appRoot = document.getElementById('app');
 
-// this keyword - no longer bound
-var user = {
-    name: 'Jon',
-    cities: ['Manila', 'Chicago', 'New York'],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
+ReactDOM.render(template, appRoot);
 
-        console.log(this.name);
-        console.log(this.cities);
+// Create Template JSX Expression
+// Render instead of Template
+// const user = {
+//     name: 'Jon Maldia',
+//     age: 42,
+//     location: 'NYC'
+// };
 
-        // workaround that = this
+// function getLocation(location) {
+//     if (location) { 
+//         return <p>Location: {location}</p>; 
+//     }
+// }
 
-        this.cities.forEach(function (city) {
-            console.log(_this.name + ' has lived in ' + city);
-        });
-    }
-};
+// const templateTwo = (
+//     <div>
+//         <h1>{user.name ? user.name.toUpperCase() + '!' : 'Anonymous'}</h1>
+//         {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+//         {getLocation(user.location)}
+//     </div>
+// ); 
 
-user.printPlacesLived();
+// const appRootTwo = document.getElementById('app-two');
+
+
+// ReactDOM.render(templateTwo, appRootTwo);

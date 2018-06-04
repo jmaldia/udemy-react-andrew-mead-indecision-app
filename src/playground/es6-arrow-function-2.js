@@ -17,17 +17,34 @@ const addArrow = (a, b) => {
 const user = {
     name: 'Jon',
     cities: ['Manila', 'Chicago', 'New York'],
-    printPlacesLived: function() {
-        console.log(this.name);
-        console.log(this.cities);
+    printPlacesLived() {
+        // console.log(this.name)
+        // console.log(this.cities);
 
-        // workaround that = this
+        // // workaround that = this
 
-        this.cities.forEach((city) => {
-            console.log(this.name + ' has lived in ' + city);
-        });
+        // this.cities.forEach((city) => {
+        //     console.log(this.name + ' has lived in ' + city);
+        // });
+
+        return this.cities.map((city) => this.name + ' has lived in ' + city);
     }
 }
 
-user.printPlacesLived();
+console.log(user.printPlacesLived());
 
+
+// Challenge
+const multiplier = {
+    // array of numbers to multiply
+    // multiply by, single number
+    // get a new array
+    // method called multiply, return new array with numbers multiplied
+
+    arrayOfNum: [2, 3, 5, 17],
+    multiplier: 4,
+    multiply() {
+        return this.arrayOfNum.map((num) => num * this.multiplier);
+    }
+}
+console.log(multiplier.multiply());
