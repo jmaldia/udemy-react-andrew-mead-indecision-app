@@ -23,9 +23,13 @@ const removeOptions = () => {
     renderUI();
 };
 
-const appRoot = document.getElementById('app');
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    console.log(option);
+};
 
-const numbers = [55, 101, 1000];
+const appRoot = document.getElementById('app');
 
 const renderUI = () => {
     // JSX - JavaScript XML
@@ -34,13 +38,14 @@ const renderUI = () => {
             <h1>{app.title}</h1>
             {app.subTitle && <p>{app.subTitle}</p>}
             <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-            <p>{app.options.length}</p>
+
             <ol>
                 { 
                     app.options.map((option) => <li key={option}>{option}</li>) 
                 }
             </ol>  
             
+            <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
             <button onClick={removeOptions}>Remove Options</button>
             
             <form onSubmit={onFormSubmit}>
