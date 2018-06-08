@@ -5,52 +5,87 @@ console.log('App.js is Running');
 var app = {
     title: 'The Awesome Indecision App',
     subTitle: 'What a wonderful App',
-    options: ['Item One', 'Item Two']
+    options: []
 };
 
-// JSX - JavaScript XML
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.subTitle && React.createElement(
-        'p',
-        null,
-        app.subTitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? 'Here are your options' : 'No options'
-    ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            'Item One'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item Two'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item Three'
-        )
-    )
-);
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+
+    var option = e.target.elements.option.value;
+
+    if (option) {
+        app.options.push(option); // add the option value to the array above
+        e.target.elements.option.value = ''; // set the field to blank
+        renderUI();
+    }
+};
+
+var removeOptions = function removeOptions() {
+    app.options = [];
+    renderUI();
+};
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+var numbers = [55, 101, 1000];
+
+var renderUI = function renderUI() {
+    // JSX - JavaScript XML
+    var template = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            app.title
+        ),
+        app.subTitle && React.createElement(
+            'p',
+            null,
+            app.subTitle
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length > 0 ? 'Here are your options' : 'No options'
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length
+        ),
+        React.createElement(
+            'ol',
+            null,
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
+        ),
+        React.createElement(
+            'button',
+            { onClick: removeOptions },
+            'Remove Options'
+        ),
+        React.createElement(
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                { type: 'submit' },
+                'Add Option'
+            )
+        )
+    );
+
+    ReactDOM.render(template, appRoot);
+};
+
+renderUI();
 
 // Create Template JSX Expression
 // Render instead of Template
