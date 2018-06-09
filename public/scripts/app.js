@@ -49,22 +49,6 @@ var renderUI = function renderUI() {
             app.subTitle
         ),
         React.createElement(
-            'p',
-            null,
-            app.options.length > 0 ? 'Here are your options' : 'No options'
-        ),
-        React.createElement(
-            'ol',
-            null,
-            app.options.map(function (option) {
-                return React.createElement(
-                    'li',
-                    { key: option },
-                    option
-                );
-            })
-        ),
-        React.createElement(
             'button',
             { disabled: app.options.length === 0, onClick: onMakeDecision },
             'What should I do?'
@@ -83,6 +67,22 @@ var renderUI = function renderUI() {
                 { type: 'submit' },
                 'Add Option'
             )
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length > 0 ? 'Here are your options' : 'No options'
+        ),
+        React.createElement(
+            'ol',
+            null,
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
         )
     );
 

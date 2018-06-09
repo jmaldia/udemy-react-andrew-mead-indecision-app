@@ -37,21 +37,21 @@ const renderUI = () => {
         <div>
             <h1>{app.title}</h1>
             {app.subTitle && <p>{app.subTitle}</p>}
+            <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+            <button onClick={removeOptions}>Remove Options</button> 
+            
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option"/>
+                <button type="submit">Add Option</button>
+            </form>
+            
             <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
 
             <ol>
                 { 
                     app.options.map((option) => <li key={option}>{option}</li>) 
                 }
-            </ol>  
-            
-            <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
-            <button onClick={removeOptions}>Remove Options</button>
-            
-            <form onSubmit={onFormSubmit}>
-                <input type="text" name="option"/>
-                <button type="submit">Add Option</button>
-            </form>
+            </ol> 
         </div>
     );
 
