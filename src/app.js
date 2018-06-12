@@ -1,88 +1,97 @@
-console.log('App.js is Running');
-
-const app = {
-    title: 'The Awesome Indecision App',
-    subTitle: 'What a wonderful App',
-    options: []
-};
-
-const onFormSubmit = (e) => {
-    e.preventDefault();
-
-    const option = e.target.elements.option.value;
-
-    if (option) {
-        app.options.push(option); // add the option value to the array above
-        e.target.elements.option.value = ''; // set the field to blank
-        renderUI();
-    }
-};
-
-const removeOptions = () => {
-    app.options = [];
-    renderUI();
-};
-
-const onMakeDecision = () => {
-    const randomNum = Math.floor(Math.random() * app.options.length);
-    const option = app.options[randomNum];
-    console.log(option);
-};
-
-const appRoot = document.getElementById('app');
-
-const renderUI = () => {
-    // JSX - JavaScript XML
-    const template = (
+class IndecisionApp extends React.Component {
+    render() {
+      const title = 'Indecision';
+      const subtitle = 'Put your life in the hands of a computer';
+      const options = ['Thing one', 'Thing two', 'Thing four'];
+  
+      return (
         <div>
-            <h1>{app.title}</h1>
-            {app.subTitle && <p>{app.subTitle}</p>}
-            <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
-            <button onClick={removeOptions}>Remove Options</button> 
-            
-            <form onSubmit={onFormSubmit}>
+          <Header title={title} subtitle={subtitle} />
+          <Action />
+          <Options options={options} />
+          <AddOption />
+        </div>
+      );
+    }
+  }
+  
+  class Header extends React.Component {
+    render() {
+      return (
+        <div>
+          <h1>{this.props.title}</h1>
+          <h2>{this.props.subtitle}</h2>
+        </div>
+      );
+    }
+  }
+  
+  class Action extends React.Component {
+    handlePick() {
+        alert('handlePick');
+    }
+    
+    render() {
+      return (
+        <div>
+          <button onClick={this.handlePick}>What should I do?</button>
+        </div>
+      );
+    }
+  }
+  
+  class Options extends React.Component {
+    handleRemoveAll() {
+        alert('handleRemoveAll');
+    }
+
+    render() {
+      return (
+        <div>
+            <button onClick={this.handleRemoveAll}>Remove All</button>
+            {
+                this.props.options.map((option) => <Option key={option} optionText={option} />)
+            }
+        </div>
+      );
+    }
+  }
+  
+  class Option extends React.Component {
+    render() {
+      return (
+        <div>
+          {this.props.optionText}
+        </div>
+      );
+    }
+  }
+  
+  class AddOption extends React.Component {
+    handleAddOption(e) {
+        // e.preventDefault();
+
+        // const option = e.target.elements.option.value;
+    
+        // if (option) {
+        //     IndecisionApp.options.push(option); // add the option value to the array above
+        //     e.target.elements.option.value = ''; // set the field to blank
+        // }
+
+        alert('handleAddOption');
+    }
+    
+    render() {
+      return (
+        <div>
+            <form onSubmit={this.handleAddOption}>
                 <input type="text" name="option"/>
                 <button type="submit">Add Option</button>
             </form>
-            
-            <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-
-            <ol>
-                { 
-                    app.options.map((option) => <li key={option}>{option}</li>) 
-                }
-            </ol> 
         </div>
-    );
-
-    ReactDOM.render(template, appRoot);
-}
-
-renderUI();
-
-// Create Template JSX Expression
-// Render instead of Template
-// const user = {
-//     name: 'Jon Maldia',
-//     age: 42,
-//     location: 'NYC'
-// };
-
-// function getLocation(location) {
-//     if (location) { 
-//         return <p>Location: {location}</p>; 
-//     }
-// }
-
-// const templateTwo = (
-//     <div>
-//         <h1>{user.name ? user.name.toUpperCase() + '!' : 'Anonymous'}</h1>
-//         {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-//         {getLocation(user.location)}
-//     </div>
-// ); 
-
-// const appRootTwo = document.getElementById('app-two');
-
-
-// ReactDOM.render(templateTwo, appRootTwo);
+      );
+    }
+  }
+  
+  ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+  
