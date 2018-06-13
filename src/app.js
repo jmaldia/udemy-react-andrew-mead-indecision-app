@@ -41,8 +41,13 @@ class IndecisionApp extends React.Component {
   }
   
   class Options extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    }
+
     handleRemoveAll() {
-        alert('handleRemoveAll');
+        console.log(this.props.options[0]);
     }
 
     render() {
@@ -69,16 +74,15 @@ class IndecisionApp extends React.Component {
   
   class AddOption extends React.Component {
     handleAddOption(e) {
-        // e.preventDefault();
+        e.preventDefault();
 
-        // const option = e.target.elements.option.value;
+        const option = e.target.elements.option.value.trim();
     
-        // if (option) {
-        //     IndecisionApp.options.push(option); // add the option value to the array above
-        //     e.target.elements.option.value = ''; // set the field to blank
-        // }
-
-        alert('handleAddOption');
+        if (option) {
+            // IndecisionApp.options.push(option); // add the option value to the array above
+            alert(option);
+            e.target.elements.option.value = ''; // set the field to blank
+        }
     }
     
     render() {
