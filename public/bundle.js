@@ -69,7 +69,7 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__person_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__person_js__ = __webpack_require__(1);
 // import './utils.js';
 // import subtract, { square, add } from './utils.js';
 
@@ -84,8 +84,7 @@ console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["a" /* canDrink */](21));
 console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["b" /* default */](64));
 
 /***/ }),
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
